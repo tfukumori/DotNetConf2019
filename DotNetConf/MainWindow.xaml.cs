@@ -6,7 +6,6 @@ using System.Windows.Input;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
-using System.Collections.Generic;
 
 namespace DotNetConf
 {
@@ -23,9 +22,9 @@ namespace DotNetConf
 		public MainWindow()
 		{
 			InitializeComponent();
-			AppCenter.Start("c133cf25-d427-4ed5-b556-bbac44e0c69e",
-							   typeof(Analytics), typeof(Crashes));
-			_paper = new PaperTrail(this);
+            AppCenter.Start("9a2d560a-7da8-4996-97c6-c781f7522e66",
+                   typeof(Analytics), typeof(Crashes));
+            _paper = new PaperTrail(this);
 			ProcessKey('0');
 			EraseDisplay = true;
 		}
@@ -182,7 +181,6 @@ namespace DotNetConf
 				case "BEqual":
 					if (EraseDisplay) //stil wait for a digit...
 						break;
-					Analytics.TrackEvent("Pressed Equals");
 					CalcResults();
 					EraseDisplay = true;
 					_lastOper = Operation.None;
@@ -321,7 +319,6 @@ namespace DotNetConf
 				Window parent = (Window)MyPanel.Parent;
 				_paper.AddResult("Error");
 				string equation = _paper.args;
-				Crashes.TrackError(e, new Dictionary<string, string>() { { "Equation: ", equation } });
 				throw e;
 				//MessageBox.Show(parent, "Operation cannot be perfomed", parent.Title);
 			}
